@@ -1,28 +1,37 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
-import logo from '../logo.svg';
-import './App.css';
 
-function App() {
+import Header from './Header/Header';
+import Main from './Main/Main';
+import Nonprofit from './Nonprofit/Nonprofit';
+
+import css from './App.module.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const user = {
+  name: 'Kristina',
+  admin: true,
+  auth: false,
+  users: [],
+};
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <Button variant="primary">Primary</Button>
-      </header>
+    <div className={`${css.wrapApp}`}>
+      {!user.auth && <Nonprofit />}
+
+      {user.auth && (
+        <>
+          <header className={css.header}>
+            <Header user={user} />
+          </header>
+
+          <main className={css.main}>
+            <Main />
+          </main>
+        </>
+      )}
     </div>
   );
-}
+};
 
 export default App;
